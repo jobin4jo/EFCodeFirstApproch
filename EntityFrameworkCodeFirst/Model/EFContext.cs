@@ -1,5 +1,6 @@
 ﻿using EntityFrameworkCodeFirst.Entity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace EntityFrameworkCodeFirst.Model
 {
@@ -10,9 +11,11 @@ namespace EntityFrameworkCodeFirst.Model
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Customers>().Property(x => x.Firstname).HasMaxLength(1000);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
 
         }
         public DbSet<Customers> Customers { get; set; } 
